@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
               items: imgList
                   .map((item) => Container(
                         child: Center(
-                            child: Image.network(item,
+                            child: Image.asset(item,
                                 fit: BoxFit.cover, width: 1000)),
                       ))
                   .toList(),
@@ -124,101 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 150,
-                width: double.infinity,
-                child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    Container(
-                      width: 170,
-                      height: 181,
-                      decoration: BoxDecoration(
-                        color: Color.fromRGBO(
-                            110, 76, 248, 0.149), // Opacity background color
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(flex: 1, child: Icon(EvaIcons.activity)),
-                          Expanded(
-                            flex: 1,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                "250V",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      width: 170,
-                      height: 181,
-                      decoration: BoxDecoration(
-                        color: Color.fromRGBO(
-                            110, 76, 248, 0.149), // Opacity background color
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(flex: 1, child: Icon(EvaIcons.moon)),
-                          Expanded(
-                            flex: 2,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                "Cost",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 170,
-                      height: 181,
-                      decoration: BoxDecoration(
-                        color: Color.fromRGBO(
-                            110, 76, 248, 0.149), // Opacity background color
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(flex: 1, child: Icon(EvaIcons.battery)),
-                          Expanded(
-                            flex: 2,
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                "Long Battery",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            Feature_Widget(),
             SizedBox(
               height: 20,
             ),
@@ -235,6 +141,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Text("P r o d u ct   A p p l i c a t i o n s",
+                style: TextStyle(color: Colors.black, fontSize: 20)),
+            SizedBox(
+              height: 20,
+            ),
+            Applications_widget(),
           ],
         ),
       ),
@@ -260,7 +175,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    _advancedDrawerController.toggleDrawer();
+                  },
                   leading: Icon(EvaIcons.homeOutline),
                   title: Text('Home'),
                 ),
@@ -295,18 +212,372 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  final List<String> imgList = [
-    'https://images.unsplash.com/photo-1524234107056-1c1f48f64ab8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2874&q=80'
-        'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-  ];
+  final List<String> imgList = ['assets/images/1-1.png'];
 
   void _handleMenuButtonPressed() {
     // NOTICE: Manage Advanced Drawer state through the Controller.
     // _advancedDrawerController.value = AdvancedDrawerValue.visible();
     _advancedDrawerController.showDrawer();
+  }
+}
+
+class Feature_Widget extends StatelessWidget {
+  const Feature_Widget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: 150,
+        width: double.infinity,
+        child: ListView(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.activity)),
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "250V",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.moon)),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Cost",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.battery)),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Long Battery",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Applications_widget extends StatelessWidget {
+  const Applications_widget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: 150,
+        width: double.infinity,
+        child: ListView(
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          children: [
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.sunOutline)),
+                  Expanded(
+                    flex: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "LED",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.moon)),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Tube Lights",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.battery)),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Mobile Charging",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.battery)),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Bluetooth Speakers",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.battery)),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Wifi",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.battery)),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Camera",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.battery)),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "Agri Spray Pump",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.battery)),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "12V DC Motor",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 10),
+            Container(
+              width: 170,
+              height: 181,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(
+                    110, 76, 248, 0.149), // Opacity background color
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Icon(EvaIcons.battery)),
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        "DC Fans & Lights",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
