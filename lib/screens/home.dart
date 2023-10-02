@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:animated_flip_counter/animated_flip_counter.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:vnbweb/screens/cart.dart';
+import 'package:vnbweb/screens/contact.dart';
+import 'package:vnbweb/screens/gallery_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -68,7 +72,13 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.leftToRight,
+                          child: CartScreen()));
+                },
                 icon: Icon(
                   EvaIcons.shoppingCartOutline,
                   color: Colors.black,
@@ -99,58 +109,78 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-                child: CarouselSlider(
-              options: CarouselOptions(),
-              items: imgList
-                  .map((item) => Container(
-                        child: Center(
-                            child: Image.asset(item,
-                                fit: BoxFit.cover, width: 1000)),
-                      ))
-                  .toList(),
-            )),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "P r o d u c t   F e a t u r e s",
-              style: TextStyle(color: Colors.black, fontSize: 20),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Feature_Widget(),
-            SizedBox(
-              height: 20,
-            ),
-            Text("P r o d u ct   S o l d",
-                style: TextStyle(color: Colors.black, fontSize: 20)),
-            AnimatedFlipCounter(
-              value: _value,
-              duration: Duration(seconds: 2),
-              padding: EdgeInsets.symmetric(vertical: 8),
-              curve: Curves.elasticOut,
-              textStyle: TextStyle(
-                  fontSize: 60,
-                  color: Colors.purple[300],
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w800),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text("P r o d u ct   A p p l i c a t i o n s",
-                style: TextStyle(color: Colors.black, fontSize: 20)),
-            SizedBox(
-              height: 20,
-            ),
-            Applications_widget(),
-          ],
+        floatingActionButton: FloatingActionButton.extended(
+          // elevation: 3,
+          backgroundColor: Colors.amber,
+          icon: Icon(EvaIcons.shoppingCartOutline),
+          onPressed: () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.bottomToTop, child: CartScreen()));
+          },
+          label: Text("Buy Now"),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  child: CarouselSlider(
+                options: CarouselOptions(
+                  autoPlay: false,
+                  enlargeCenterPage: true,
+                  viewportFraction: 0.9,
+                  aspectRatio: 2.0,
+                  initialPage: 2,
+                ),
+                items: imgList
+                    .map((item) => Container(
+                          child: Center(
+                              child: Image.asset(item,
+                                  fit: BoxFit.cover, width: 1000)),
+                        ))
+                    .toList(),
+              )),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "P r o d u c t   F e a t u r e s",
+                style: TextStyle(color: Colors.black, fontSize: 20),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Feature_Widget(),
+              SizedBox(
+                height: 20,
+              ),
+              Text("P r o d u ct   S o l d",
+                  style: TextStyle(color: Colors.black, fontSize: 20)),
+              AnimatedFlipCounter(
+                value: _value,
+                duration: Duration(seconds: 2),
+                padding: EdgeInsets.symmetric(vertical: 8),
+                curve: Curves.elasticOut,
+                textStyle: TextStyle(
+                    fontSize: 60,
+                    color: Colors.purple[300],
+                    fontStyle: FontStyle.normal,
+                    fontWeight: FontWeight.w800),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text("P r o d u ct   A p p l i c a t i o n s",
+                  style: TextStyle(color: Colors.black, fontSize: 20)),
+              SizedBox(
+                height: 20,
+              ),
+              Applications_widget(),
+            ],
+          ),
         ),
       ),
       drawer: SafeArea(
@@ -182,12 +212,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text('Home'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.leftToRight,
+                            child: GalleryScreen()));
+                  },
                   leading: Icon(EvaIcons.imageOutline),
                   title: Text('Gallery'),
                 ),
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.leftToRight,
+                            child: ContactUsPage()));
+                  },
                   leading: Icon(EvaIcons.emailOutline),
                   title: Text('Contact us'),
                 ),
@@ -236,7 +278,6 @@ class Feature_Widget extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          physics: NeverScrollableScrollPhysics(),
           children: [
             Container(
               width: 170,

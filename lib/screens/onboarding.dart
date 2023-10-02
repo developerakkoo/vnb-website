@@ -27,7 +27,7 @@ class TestScreen extends StatelessWidget {
           color: Colors.purpleAccent,
           fontSize: 40,
           fontWeight: FontWeight.w900),
-      title: 'Power on multiple applications',
+      title: 'Power your devices',
       subTitle: 'Our tech provides support for multiple kinds on appliances',
       imageUrl: 'assets/images/3-3.png',
     ),
