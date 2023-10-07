@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
@@ -8,6 +9,7 @@ import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:vnbweb/screens/cart.dart';
 import 'package:vnbweb/screens/contact.dart';
+import 'package:vnbweb/screens/details.dart';
 import 'package:vnbweb/screens/gallery_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -54,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xff00416a), Color(0xffe4e5e6)],
+            colors: [Color(0xFF7F00FF), Color(0xffE100FF)],
           ),
         ),
       ),
@@ -109,17 +111,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          // elevation: 3,
-          backgroundColor: Colors.amber,
-          icon: Icon(EvaIcons.shoppingCartOutline),
-          onPressed: () {
-            Navigator.push(
-                context,
-                PageTransition(
-                    type: PageTransitionType.bottomToTop, child: CartScreen()));
-          },
-          label: Text("Buy Now"),
+        floatingActionButton: ElasticInDown(
+          child: FloatingActionButton.extended(
+            // elevation: 3,
+            backgroundColor: Colors.amber,
+            icon: Icon(EvaIcons.shoppingCartOutline),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.bottomToTop, child: Details()));
+            },
+            label: Text("Buy Now"),
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -136,10 +140,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   initialPage: 2,
                 ),
                 items: imgList
-                    .map((item) => Container(
-                          child: Center(
-                              child: Image.asset(item,
-                                  fit: BoxFit.cover, width: 1000)),
+                    .map((item) => FadeIn(
+                          child: Container(
+                            child: Center(
+                                child: Image.asset(item,
+                                    fit: BoxFit.cover, width: 1000)),
+                          ),
                         ))
                     .toList(),
               )),
@@ -178,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 20,
               ),
-              Applications_widget(),
+              ElasticInRight(child: Applications_widget()),
             ],
           ),
         ),
@@ -254,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  final List<String> imgList = ['assets/images/1-1.png'];
+  final List<String> imgList = ['assets/images/3-1.jpeg'];
 
   void _handleMenuButtonPressed() {
     // NOTICE: Manage Advanced Drawer state through the Controller.
@@ -279,83 +285,89 @@ class Feature_Widget extends StatelessWidget {
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           children: [
-            Container(
-              width: 170,
-              height: 181,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(
-                    110, 76, 248, 0.149), // Opacity background color
-                borderRadius: BorderRadius.circular(18),
-              ),
-              child: Row(
-                children: [
-                  Expanded(flex: 1, child: Icon(EvaIcons.activity)),
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        "250V",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+            ElasticInLeft(
+              child: Container(
+                width: 170,
+                height: 181,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(
+                      110, 76, 248, 0.149), // Opacity background color
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(flex: 1, child: Icon(EvaIcons.activity)),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          "250V",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             SizedBox(
               width: 10,
             ),
-            Container(
-              width: 170,
-              height: 181,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(
-                    110, 76, 248, 0.149), // Opacity background color
-                borderRadius: BorderRadius.circular(18),
-              ),
-              child: Row(
-                children: [
-                  Expanded(flex: 1, child: Icon(EvaIcons.moon)),
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        "Cost",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+            ElasticInLeft(
+              child: Container(
+                width: 170,
+                height: 181,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(
+                      110, 76, 248, 0.149), // Opacity background color
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(flex: 1, child: Icon(EvaIcons.moon)),
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          "Cost",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             SizedBox(width: 10),
-            Container(
-              width: 170,
-              height: 181,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(
-                    110, 76, 248, 0.149), // Opacity background color
-                borderRadius: BorderRadius.circular(18),
-              ),
-              child: Row(
-                children: [
-                  Expanded(flex: 1, child: Icon(EvaIcons.battery)),
-                  Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        "Long Battery",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+            ElasticInLeft(
+              child: Container(
+                width: 170,
+                height: 181,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(
+                      110, 76, 248, 0.149), // Opacity background color
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(flex: 1, child: Icon(EvaIcons.battery)),
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          "Long Battery",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             )
           ],

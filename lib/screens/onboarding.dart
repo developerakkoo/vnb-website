@@ -8,9 +8,7 @@ class TestScreen extends StatelessWidget {
   final List<Introduction> list = [
     Introduction(
       titleTextStyle: TextStyle(
-          color: Colors.purpleAccent,
-          fontSize: 40,
-          fontWeight: FontWeight.w900),
+          color: Color(0xFFE040FB), fontSize: 40, fontWeight: FontWeight.w900),
       title: 'On Spot Energy',
       subTitle: 'Get it where you are.',
       imageUrl: 'assets/images/1-1.png',

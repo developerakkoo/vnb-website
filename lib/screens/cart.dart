@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:vnbweb/screens/home.dart';
@@ -57,126 +58,122 @@ class _CartScreenState extends State<CartScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Card(
-            elevation: 4.0,
-            margin: EdgeInsets.all(16.0),
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 80.0,
-                        height: 80.0,
-                        decoration: BoxDecoration(
+          ElasticInLeft(
+            child: Card(
+              elevation: 4.0,
+              margin: EdgeInsets.all(16.0),
+              child: Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 80.0,
+                          height: 80.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                            color: Colors.purple[
+                                300], // You can replace this with your product image
+                          ),
+                          // Replace the child with your product image
+                          child: Image.asset("assets/images/3.png"),
+                        ),
+                        SizedBox(width: 16.0),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'On Spot Energy',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              '\1230.00',
+                              style: TextStyle(
+                                decoration: TextDecoration.lineThrough,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            Text(
+                              '\128.00',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
-                          color: Colors
-                              .deepPurple, // You can replace this with your product image
-                        ),
-                        // Replace the child with your product image
-                        child: Center(
-                          child: Icon(
-                            Icons.shopping_cart,
-                            color: Colors.white,
+                          color: Colors.grey[200]
+                          // You can replace this with your product image
                           ),
-                        ),
-                      ),
-                      SizedBox(width: 16.0),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Column(
                         children: [
-                          Text(
-                            'Product Name',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          IconButton(
+                            icon: Icon(Icons.remove),
+                            onPressed: decrementCount,
                           ),
                           Text(
-                            '\1230.00',
-                            style: TextStyle(
-                              decoration: TextDecoration.lineThrough,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Text(
-                            '\128.00',
+                            itemCount.toString(),
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                          IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: incrementCount,
+                          ),
                         ],
                       ),
-                    ],
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                        color: Colors.grey[200]
-                        // You can replace this with your product image
-                        ),
-                    child: Column(
-                      children: [
-                        IconButton(
-                          icon: Icon(Icons.remove),
-                          onPressed: decrementCount,
-                        ),
-                        Text(
-                          itemCount.toString(),
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.add),
-                          onPressed: incrementCount,
-                        ),
-                      ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
-          ElevatedButton(
-              onPressed: () => _launchWhatsApp("917767952154", ""),
-              child: Text("Send")),
-          Padding(
-            padding: const EdgeInsets.all(30.0),
-            child: SwipeableButtonView(
-              buttonText: 'SLIDE TO PAYMENT',
-              buttonWidget: Container(
-                height: 150,
-                child: Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.grey,
+          ElasticInRight(
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: SwipeableButtonView(
+                buttonText: 'SLIDE TO PLACE ORDER',
+                buttonWidget: Container(
+                  height: 150,
+                  child: Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.grey,
+                  ),
                 ),
-              ),
-              activeColor: Colors.deepPurple,
-              isFinished: isFinished,
-              onWaitingProcess: () {
-                print("Open a Dialog With Form");
-                Future.delayed(Duration(seconds: 2), () {
-                  setState(() {
-                    isFinished = true;
+                activeColor: Colors.purpleAccent,
+                isFinished: isFinished,
+                onWaitingProcess: () {
+                  print("Open a Dialog With Form");
+                  Future.delayed(Duration(seconds: 2), () {
+                    setState(() {
+                      isFinished = true;
+                    });
                   });
-                });
-              },
-              onFinish: () async {
-                // await Navigator.push(
-                //     context,
-                //     PageTransition(
-                //         type: PageTransitionType.fade, child: HomeScreen()));
-                _launchWhatsApp("917767952154", "Hi From Akkoo");
-                //TODO: For reverse ripple effect animation
-                setState(() {
-                  isFinished = false;
-                });
-              },
+                },
+                onFinish: () async {
+                  // await Navigator.push(
+                  //     context,
+                  //     PageTransition(
+                  //         type: PageTransitionType.fade, child: HomeScreen()));
+                  _launchWhatsApp("917767952154", "Hi From Akkoo");
+                  //TODO: For reverse ripple effect animation
+                  setState(() {
+                    isFinished = false;
+                  });
+                },
+              ),
             ),
           )
         ],
